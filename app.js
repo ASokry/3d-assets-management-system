@@ -320,10 +320,10 @@ app.post('/models/update', async function (req, res) {
         const data = req.body;
 
         // If material id or texture id aren't numbers, make them NULL.
-        if (isNaN(parseInt(data.update_model_material)))
-            data.update_model_material = null;
-        if (isNaN(parseInt(data.update_model_texture)))
-            data.update_model_texture = null;
+        if (isNaN(parseInt(data.update_model_id_material)))
+            data.update_model_id_material = null;
+        if (isNaN(parseInt(data.update_model_id_texture)))
+            data.update_model_id_texture = null;
 
         // Create and execute our query
         // Using parameterized queries (Prevents SQL injection attacks)
@@ -335,8 +335,8 @@ app.post('/models/update', async function (req, res) {
             data.update_model_modified_date,
             data.update_model_file_path,
             data.update_model_is_active,
-            data.update_model_material,
-            data.update_model_texture
+            data.update_model_id_material,
+            data.update_model_id_texture
         ]);
         const [[rows]] = await db.query(query2, [data.update_model_id]);
 
