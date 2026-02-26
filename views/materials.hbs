@@ -48,12 +48,18 @@
 
 {{! CREATE form }}
 <h2>Create a Material</h2>
-<form class='cuForm' id='create_material_form'>
+<form class='cuForm' id='create_material_form' method='POST' action='/materials/create'>
     <label for='create_material_name'>Name: </label>
     <input type='text' name='create_material_name' id='create_material_name' required />
 
     <label for='create_material_description'>Description: </label>
     <input type='text' name='create_material_description' id='create_material_description' />
+
+    <label for='create_material_created_date'>Created Date: </label>
+    <input type='date' name='create_material_created_date' id='create_material_created_date' required />
+
+    <label for='create_material_modified_date'>Modified Date: </label>
+    <input type='date' name='create_material_modified_date' id='create_material_modified_date' />
 
     <label for='create_material_base_color'>Base Color: </label>
     <input type='text' name='create_material_base_color' id='create_material_base_color' />
@@ -68,7 +74,7 @@
     <input type='number' name='create_material_transparency' id='create_material_transparency' step='0.01' min='0' max='1' />
 
     <label for='create_material_file_path'>File Path: </label>
-    <input type='text' name='create_material_file_path' id='create_material_file_path' />
+    <input type='text' name='create_material_file_path' id='create_material_file_path' required />
 
     <label for='create_material_id_artist'>Artist ID: </label>
     <select name='create_material_id_artist' id='create_material_id_artist'>
@@ -81,7 +87,11 @@
     </select>
 
     <label for='create_material_is_active'>Is Active: </label>
-    <input type='checkbox' name='create_material_is_active' id='create_material_is_active' />
+    <select name='create_material_is_active' id='create_material_is_active' required >
+        <option value='1' selected>Select</option>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+    </select>
 
     <input type='submit' />
 </form>

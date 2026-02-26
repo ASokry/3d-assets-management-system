@@ -127,6 +127,192 @@ app.get('/model-artist', async function (req, res) {
     }
 });
 
+// CREATE ROUTES
+app.post('/models/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // If material id or texture id aren't numbers, make them NULL.
+        if (isNaN(parseInt(data.create_model_id_material)))
+            data.create_model_id_material = null;
+        if (isNaN(parseInt(data.create_model_id_texture)))
+            data.create_model_id_texture = null;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateModel(?, ?, ?, ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_model_name,
+            data.create_model_description,
+            data.create_model_created_date,
+            data.create_model_modified_date,
+            data.create_model_file_path,
+            data.create_model_is_active,
+            data.create_model_id_material,
+            data.create_model_id_texture
+        ]);
+
+        console.log(`CREATE Model. ID: ${rows.new_id} ` +
+            `Name: ${data.create_model_name}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/models');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/artists/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateArtist(?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_artist_first_name,
+            data.create_artist_last_name,
+            data.create_artist_email,
+            data.create_artist_phone
+        ]);
+
+        console.log(`CREATE Artist. ID: ${rows.new_id} ` +
+            `Name: ${data.create_artist_first_name} ${data.create_artist_last_name}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/artists');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/materials/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // If artist id isn't a number, make them NULL.
+        if (isNaN(parseInt(data.create_material_id_artist)))
+            data.create_material_id_artist = null;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateMaterial(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_material_name,
+            data.create_material_description,
+            data.create_material_created_date,
+            data.create_material_modified_date,
+            data.create_material_base_color,
+            data.create_material_roughness,
+            data.create_material_metallic,
+            data.create_material_transparency,
+            data.create_material_file_path,
+            data.create_material_id_artist,
+            data.create_material_is_active
+        ]);
+
+        console.log(`CREATE Material. ID: ${rows.new_id} ` +
+            `Name: ${data.create_material_name}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/materials');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/textures/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // If artist id isn't a number, make them NULL.
+        if (isNaN(parseInt(data.create_texture_id_artist)))
+            data.create_texture_id_artist = null;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateTexture(?, ?, ?, ?, ?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_texture_name,
+            data.create_texture_description,
+            data.create_texture_created_date,
+            data.create_texture_modified_date,
+            data.create_texture_resolution,
+            data.create_texture_file_path,
+            data.create_texture_id_artist,
+            data.create_texture_is_active
+        ]);
+
+        console.log(`CREATE Texture. ID: ${rows.new_id} ` +
+            `Name: ${data.create_texture_name}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/textures');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/model-artist/create', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our queries
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_CreateModelAndArtist(?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.create_model_artist_id_model,
+            data.create_model_artist_id_artist
+        ]);
+
+        console.log(`CREATE Model-Artist. ID: ${rows.new_id} `);
+
+        // Redirect the user to the updated webpage
+        res.redirect('/model-artist');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // DELETE ROUTES
 app.post('/models/delete', async function (req, res) {
     try {

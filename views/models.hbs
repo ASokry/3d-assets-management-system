@@ -45,7 +45,7 @@
 
 {{! CREATE form }}
 <h2>Create a Model</h2>
-<form class='cuForm' id='create_model_form'>
+<form class='cuForm' id='create_model_form' method='POST' action='/models/create'>
     <label for='create_model_name'>Name: </label>
     <input type='text' name='create_model_name' id='create_model_name' required />
 
@@ -62,7 +62,11 @@
     <input type='text' name='create_model_file_path' id='create_model_file_path' required />
 
     <label for='create_model_is_active'>Is Active: </label>
-    <input type='checkbox' name='create_model_is_active' id='create_model_is_active' required />
+    <select name='create_model_is_active' id='create_model_is_active' required >
+        <option value='1' selected>Select</option>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+    </select>
 
     <label for='create_model_id_material'>Material: </label>
     <select name='create_model_id_material' id='create_model_id_material'>

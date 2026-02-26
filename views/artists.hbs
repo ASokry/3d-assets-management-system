@@ -41,7 +41,7 @@
 
 {{! CREATE form }}
 <h2>Create an Artist</h2>
-<form class='cuForm' id='create_artist_form'>
+<form class='cuForm' id='create_artist_form' method='POST' action='/artists/create'>
     <label for='create_artist_first_name'>First Name: </label>
     <input type='text' name='create_artist_first_name' id='create_artist_first_name' required />
 
@@ -49,7 +49,7 @@
     <input type='text' name='create_artist_last_name' id='create_artist_last_name' required />
 
     <label for='create_artist_email'>Email: </label>
-    <input type='email' name='create_artist_email' id='create_artist_email' />
+    <input type='email' name='create_artist_email' id='create_artist_email' required />
 
     <label for='create_artist_phone'>Phone: </label>
     <input type='text' name='create_artist_phone' id='create_artist_phone' />
