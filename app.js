@@ -125,7 +125,132 @@ app.get('/model-artist', async function (req, res) {
             'An error occurred while executing the database queries.'
         );
     }
-});;
+});
+
+// DELETE ROUTES
+app.post('/models/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteModel(?);`;
+        await db.query(query1, [data.delete_model_id]);
+
+        console.log(`DELETE Model. ID: ${data.delete_model_id} ` +
+            `Name: ${data.delete_model_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/models');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/artists/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteArtist(?);`;
+        await db.query(query1, [data.delete_artist_id]);
+
+        console.log(`DELETE Artist. ID: ${data.delete_artist_id} ` +
+            `Name: ${data.delete_artist_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/artists');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/materials/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteMaterial(?);`;
+        await db.query(query1, [data.delete_material_id]);
+
+        console.log(`DELETE Material. ID: ${data.delete_material_id} ` +
+            `Name: ${data.delete_material_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/materials');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/textures/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteTexture(?);`;
+        await db.query(query1, [data.delete_texture_id]);
+
+        console.log(`DELETE Texture. ID: ${data.delete_texture_id} ` +
+            `Name: ${data.delete_texture_name}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/textures');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/model-artist/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteModelAndArtist(?);`;
+        await db.query(query1, [data.delete_model_artist_id]);
+
+        console.log(`DELETE Model-Artist. ID: ${data.delete_model_artist_id} `);
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/model-artist');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 

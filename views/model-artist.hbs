@@ -22,7 +22,7 @@
     
 
             {{! DELETE form }}
-            <form id='delete_model_artist_form'>
+            <form id='delete_model_artist_form' method='POST' action='/model-artist/delete'>
                 <input type='hidden' name='delete_model_artist_id' value='{{this.id_model_artist}}' />
                 <td>
                     <button type='submit'>

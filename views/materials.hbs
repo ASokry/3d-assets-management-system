@@ -32,7 +32,7 @@
             <td>{{this.is_active}}</td>
 
             {{! DELETE form }}
-            <form id='delete_material_form'>
+            <form id='delete_material_form' method='POST' action='/materials/delete'>
                 <input type='hidden' name='delete_material_id' value='{{this.id_material}}' />
                 <input type='hidden' name='delete_material_name' value='{{this.name}}' />
                 <td>

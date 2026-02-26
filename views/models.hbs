@@ -29,7 +29,7 @@
             <td>{{this.id_texture}}</td>
 
             {{! DELETE form }}
-            <form id='delete_model_form'>
+            <form id='delete_model_form' method='POST' action='/models/delete'>
                 <input type='hidden' name='delete_model_id' value='{{this.id_model}}' />
                 <input type='hidden' name='delete_model_name' value='{{this.name}}' />
                 <td>
@@ -52,11 +52,17 @@
     <label for='create_model_description'>Description: </label>
     <input type='text' name='create_model_description' id='create_model_description' />
 
+    <label for='create_model_created_date'>Created Date: </label>
+    <input type='date' name='create_model_created_date' id='create_model_created_date' required />
+
+    <label for='create_model_modified_date'>Modified Date: </label>
+    <input type='date' name='create_model_modified_date' id='create_model_modified_date' />
+
     <label for='create_model_file_path'>File Path: </label>
-    <input type='text' name='create_model_file_path' id='create_model_file_path' />
+    <input type='text' name='create_model_file_path' id='create_model_file_path' required />
 
     <label for='create_model_is_active'>Is Active: </label>
-    <input type='checkbox' name='create_model_is_active' id='create_model_is_active' />
+    <input type='checkbox' name='create_model_is_active' id='create_model_is_active' required />
 
     <label for='create_model_id_material'>Material: </label>
     <select name='create_model_id_material' id='create_model_id_material'>

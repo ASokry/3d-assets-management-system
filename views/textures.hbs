@@ -29,7 +29,7 @@
             <td>{{this.is_active}}</td>
 
             {{! DELETE form }}
-            <form id='delete_texture_form'>
+            <form id='delete_texture_form' method='POST' action='/textures/delete'>
                 <input type='hidden' name='delete_texture_id' value='{{this.id_texture}}' />
                 <input type='hidden' name='delete_texture_name' value='{{this.name}}' />
                 <td>
