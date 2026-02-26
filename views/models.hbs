@@ -1,0 +1,121 @@
+<h1>Models</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each models.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the model attributes }}
+        {{#each models}}
+        <tr>
+            <td>{{this.id_model}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.created_date}}</td>
+            <td>{{this.modified_date}}</td>
+            <td>{{this.file_path}}</td>
+            <td>{{this.is_active}}</td>
+            <td>{{this.id_material}}</td>
+            <td>{{this.id_texture}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_model_form'>
+                <input type='hidden' name='delete_model_id' value='{{this.id_model}}' />
+                <input type='hidden' name='delete_model_name' value='{{this.name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Model</h2>
+<form class='cuForm' id='create_model_form'>
+    <label for='create_model_name'>Name: </label>
+    <input type='text' name='create_model_name' id='create_model_name' required />
+
+    <label for='create_model_description'>Description: </label>
+    <input type='text' name='create_model_description' id='create_model_description' />
+
+    <label for='create_model_file_path'>File Path: </label>
+    <input type='text' name='create_model_file_path' id='create_model_file_path' />
+
+    <label for='create_model_is_active'>Is Active: </label>
+    <input type='checkbox' name='create_model_is_active' id='create_model_is_active' />
+
+    <label for='create_model_id_material'>Material: </label>
+    <select name='create_model_id_material' id='create_model_id_material'>
+        <option value='' disabled selected>Select a Material</option>
+        {{#each materials}}
+        <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_model_id_texture'>Texture: </label>
+    <select name='create_model_id_texture' id='create_model_id_texture'>
+        <option value='' disabled selected>Select a Texture</option>
+        {{#each textures}}
+        <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Model</h2>
+<form class='cuForm' id='update_model_form'>
+    <label for='update_model_id'>Model to Update: </label>
+    <select name='update_model_id' id='update_model_id' required>
+        <option value='' disabled selected>Select a Model</option>
+        {{#each models}}
+        <option value='{{this.id_model}}' required>
+            {{this.id_model}}
+            -
+            {{this.name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_model_description'>Description: </label>
+    <input type='text' name='update_model_description' id='update_model_description' />
+
+    <label for='update_model_file_path'>File Path: </label>
+    <input type='text' name='update_model_file_path' id='update_model_file_path' />
+
+    <label for='update_model_is_active'>Is Active: </label>
+    <input type='checkbox' name='update_model_is_active' id='update_model_is_active' />
+
+    <label for='update_model_id_material'>Material: </label>
+    <select name='update_model_id_material' id='update_model_id_material'>
+        <option value='' disabled selected>Select a Material</option>
+        {{#each materials}}
+        <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for='update_model_id_texture'>Texture: </label>
+    <select name='update_model_id_texture' id='update_model_id_texture'>
+        <option value='' disabled selected>Select a Texture</option>
+        {{#each textures}}
+        <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type='submit' />
+</form>

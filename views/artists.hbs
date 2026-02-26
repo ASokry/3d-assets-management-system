@@ -1,0 +1,83 @@
+<h1>Artists</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each artists.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the artist attributes }}
+        {{#each artists}}
+        <tr>
+            <td>{{this.id_artist}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_artist_form'>
+                <input type='hidden' name='delete_artist_id' value='{{this.id_artist}}' />
+                <input type='hidden' name='delete_artist_name' value='{{this.first_name}} {{this.last_name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create an Artist</h2>
+<form class='cuForm' id='create_artist_form'>
+    <label for='create_artist_first_name'>First Name: </label>
+    <input type='text' name='create_artist_first_name' id='create_artist_first_name' required />
+
+    <label for='create_artist_last_name'>Last Name: </label>
+    <input type='text' name='create_artist_last_name' id='create_artist_last_name' required />
+
+    <label for='create_artist_email'>Email: </label>
+    <input type='email' name='create_artist_email' id='create_artist_email' />
+
+    <label for='create_artist_phone'>Phone: </label>
+    <input type='text' name='create_artist_phone' id='create_artist_phone' />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update an Artist</h2>
+<form class='cuForm' id='update_artist_form'>
+    <label for='update_artist_id'>Artist to Update: </label>
+    <select name='update_artist_id' id='update_artist_id' required>
+        <option value='' disabled selected>Select an Artist</option>
+        {{#each artists}}
+        <option value='{{this.id_artist}}' required>
+            {{this.id_artist}}
+            -
+            {{this.first_name}}
+            {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_artist_email'>Email: </label>
+    <input type='email' name='update_artist_email' id='update_artist_email' />
+
+    <label for='update_artist_phone'>Phone: </label>
+    <input type='text' name='update_artist_phone' id='update_artist_phone' />
+
+    <input type='submit' />
+</form>

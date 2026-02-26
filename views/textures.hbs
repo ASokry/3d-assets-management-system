@@ -1,0 +1,115 @@
+<h1>Textures</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each textures.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the texture attributes }}
+        {{#each textures}}
+        <tr>
+            <td>{{this.id_texture}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.created_date}}</td>
+            <td>{{this.modified_date}}</td>
+            <td>{{this.resolution}}</td>
+            <td>{{this.file_path}}</td>
+            <td>{{this.id_artist}}</td>
+            <td>{{this.is_active}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_texture_form'>
+                <input type='hidden' name='delete_texture_id' value='{{this.id_texture}}' />
+                <input type='hidden' name='delete_texture_name' value='{{this.name}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Texture</h2>
+<form class='cuForm' id='create_texture_form'>
+    <label for='create_texture_name'>Name: </label>
+    <input type='text' name='create_texture_name' id='create_texture_name' required />
+
+    <label for='create_texture_description'>Description: </label>
+    <input type='text' name='create_texture_description' id='create_texture_description' />
+
+    <label for='create_texture_resolution'>Resolution: </label>
+    <input type='text' name='create_texture_resolution' id='create_texture_resolution' />
+
+    <label for='create_texture_file_path'>File Path: </label>
+    <input type='text' name='create_texture_file_path' id='create_texture_file_path' />
+
+    <label for='create_texture_id_artist'>Artist ID: </label>
+    <select name='create_texture_id_artist' id='create_texture_id_artist'>
+        <option value='' disabled selected>Select an Artist</option>
+        {{#each artists}}
+        <option value='{{this.id_artist}}'>
+            {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='create_texture_is_active'>Is Active: </label>
+    <input type='checkbox' name='create_texture_is_active' id='create_texture_is_active' />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Texture</h2>
+<form class='cuForm' id='update_texture_form'>
+    <label for='update_texture_id'>Texture to Update: </label>
+    <select name='update_texture_id' id='update_texture_id' required>
+        <option value='' disabled selected>Select a Texture</option>
+        {{#each textures}}
+        <option value='{{this.id_texture}}' required>
+            {{this.id_texture}}
+            -
+            {{this.name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_texture_description'>Description: </label>
+    <input type='text' name='update_texture_description' id='update_texture_description' />
+
+    <label for='update_texture_resolution'>Resolution: </label>
+    <input type='text' name='update_texture_resolution' id='update_texture_resolution' />
+
+    <label for='update_texture_file_path'>File Path: </label>
+    <input type='text' name='update_texture_file_path' id='update_texture_file_path' />
+
+    <label for='update_texture_id_artist'>Artist ID: </label>
+    <select name='update_texture_id_artist' id='update_texture_id_artist'>
+        <option value='' disabled selected>Select an Artist</option>
+        {{#each artists}}
+        <option value='{{this.id_artist}}'>
+            {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_texture_is_active'>Is Active: </label>
+    <input type='checkbox' name='update_texture_is_active' id='update_texture_is_active' />
+
+    <input type='submit' />
+</form>
