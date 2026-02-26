@@ -98,7 +98,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Material</h2>
-<form class='cuForm' id='update_material_form'>
+<form class='cuForm' id='update_material_form' method='POST' action='/materials/update'>
     <label for='update_material_id'>Material to Update: </label>
     <select name='update_material_id' id='update_material_id' required>
         <option value='' disabled selected>Select a Material</option>
@@ -114,6 +114,12 @@
     <label for='update_material_description'>Description: </label>
     <input type='text' name='update_material_description' id='update_material_description' />
 
+    <label for='update_material_created_date'>Created Date: </label>
+    <input type='date' name='update_material_created_date' id='update_material_created_date' required />
+
+    <label for='update_material_modified_date'>Modified Date: </label>
+    <input type='date' name='update_material_modified_date' id='update_material_modified_date' />
+
     <label for='update_material_base_color'>Base Color: </label>
     <input type='text' name='update_material_base_color' id='update_material_base_color' />
 
@@ -127,7 +133,7 @@
     <input type='number' name='update_material_transparency' id='update_material_transparency' step='0.01' min='0' max='1' />
 
     <label for='update_material_file_path'>File Path: </label>
-    <input type='text' name='update_material_file_path' id='update_material_file_path' />
+    <input type='text' name='update_material_file_path' id='update_material_file_path' required />
 
     <label for='update_material_id_artist'>Artist ID: </label>
     <select name='update_material_id_artist' id='update_material_id_artist'>
@@ -140,7 +146,11 @@
     </select>
 
     <label for='update_material_is_active'>Is Active: </label>
-    <input type='checkbox' name='update_material_is_active' id='update_material_is_active' />
+    <select name='update_material_is_active' id='update_material_is_active' required >
+        <option value='1' disabled selected>Select</option>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+    </select>
 
     <input type='submit' />
 </form>

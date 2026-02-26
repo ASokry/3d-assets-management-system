@@ -267,16 +267,12 @@ DROP PROCEDURE IF EXISTS sp_UpdateArtist;
 DELIMITER //
 CREATE PROCEDURE sp_UpdateArtist(
     IN p_id INT, 
-    IN p_first_name VARCHAR(45),
-    IN p_last_name VARCHAR(45),
     IN p_email VARCHAR(45),
     IN p_phone VARCHAR(25)
 )
 
 BEGIN
     UPDATE Artists SET  
-        first_name = p_first_name,
-        last_name = p_last_name,
         email = p_email,
         phone = p_phone
     WHERE id_artist = p_id; 

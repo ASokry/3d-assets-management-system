@@ -59,7 +59,7 @@
 
 {{! UPDATE form }}
 <h2>Update an Artist</h2>
-<form class='cuForm' id='update_artist_form'>
+<form class='cuForm' id='update_artist_form' method='POST' action='/artists/update'>
     <label for='update_artist_id'>Artist to Update: </label>
     <select name='update_artist_id' id='update_artist_id' required>
         <option value='' disabled selected>Select an Artist</option>
@@ -74,7 +74,7 @@
     </select>
 
     <label for='update_artist_email'>Email: </label>
-    <input type='email' name='update_artist_email' id='update_artist_email' />
+    <input type='email' name='update_artist_email' id='update_artist_email' required />
 
     <label for='update_artist_phone'>Phone: </label>
     <input type='text' name='update_artist_phone' id='update_artist_phone' />
