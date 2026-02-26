@@ -172,7 +172,6 @@ DELIMITER //
 CREATE PROCEDURE sp_UpdateModel(
     IN p_id INT, 
     IN p_description VARCHAR(255),
-    IN p_created_date DATE,
     IN p_modified_date DATE,
     IN p_file_path VARCHAR(128),
     IN p_is_active BOOLEAN,
@@ -183,7 +182,6 @@ CREATE PROCEDURE sp_UpdateModel(
 BEGIN
     UPDATE `3D_Models` SET  
         description = p_description,
-        created_date = p_created_date,
         modified_date = p_modified_date,
         file_path = p_file_path,
         is_active = p_is_active,
@@ -202,7 +200,6 @@ DELIMITER //
 CREATE PROCEDURE sp_UpdateMaterial(
     IN p_id INT, 
     IN p_description VARCHAR(255),
-    IN p_created_date DATE,
     IN p_modified_date DATE,
     IN p_base_color VARCHAR(45),
     IN p_roughness DECIMAL(6, 2),
@@ -216,7 +213,6 @@ CREATE PROCEDURE sp_UpdateMaterial(
 BEGIN
     UPDATE Materials SET  
         description = p_description,
-        created_date = p_created_date,
         modified_date = p_modified_date,
         base_color = p_base_color,
         roughness = p_roughness,
@@ -238,7 +234,6 @@ DELIMITER //
 CREATE PROCEDURE sp_UpdateTexture(
     IN p_id INT, 
     IN p_description VARCHAR(255),
-    IN p_created_date DATE,
     IN p_modified_date DATE,
     IN p_resolution VARCHAR(45),
     IN p_file_path VARCHAR(128),
@@ -249,7 +244,6 @@ CREATE PROCEDURE sp_UpdateTexture(
 BEGIN
     UPDATE Textures SET  
         description = p_description,
-        created_date = p_created_date,
         modified_date = p_modified_date,
         resolution = p_resolution,
         file_path = p_file_path,

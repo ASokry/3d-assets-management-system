@@ -327,12 +327,11 @@ app.post('/models/update', async function (req, res) {
 
         // Create and execute our query
         // Using parameterized queries (Prevents SQL injection attacks)
-        const query1 = 'CALL sp_UpdateModel(?, ?, ?, ?, ?, ?, ?, ?);';
+        const query1 = 'CALL sp_UpdateModel(?, ?, ?, ?, ?, ?, ?);';
         const query2 = 'SELECT name FROM 3D_Models WHERE id_model = ?;';
         await db.query(query1, [
             data.update_model_id,
             data.update_model_description,
-            data.update_model_created_date,
             data.update_model_modified_date,
             data.update_model_file_path,
             data.update_model_is_active,
@@ -398,12 +397,11 @@ app.post('/materials/update', async function (req, res) {
 
         // Create and execute our query
         // Using parameterized queries (Prevents SQL injection attacks)
-        const query1 = 'CALL sp_UpdateMaterial(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        const query1 = 'CALL sp_UpdateMaterial(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
         const query2 = 'SELECT name FROM Materials WHERE id_material = ?;';
         await db.query(query1, [
             data.update_material_id,
             data.update_material_description,
-            data.update_material_created_date,
             data.update_material_modified_date,
             data.update_material_base_color,
             data.update_material_roughness,
@@ -441,12 +439,11 @@ app.post('/textures/update', async function (req, res) {
 
         // Create and execute our query
         // Using parameterized queries (Prevents SQL injection attacks)
-        const query1 = 'CALL sp_UpdateTexture(?, ?, ?, ?, ?, ?, ?, ?);';
+        const query1 = 'CALL sp_UpdateTexture(?, ?, ?, ?, ?, ?, ?);';
         const query2 = 'SELECT name FROM Textures WHERE id_texture = ?;';
         await db.query(query1, [
             data.update_texture_id,
             data.update_texture_description,
-            data.update_texture_created_date,
             data.update_texture_modified_date,
             data.update_texture_resolution,
             data.update_texture_file_path,
