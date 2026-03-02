@@ -32,6 +32,17 @@ app.get('/', async function (req, res) {
     }
 });
 
+// RESET DATABASE ROUTE
+app.post('/reset-database', async function (req, res) {
+    try {
+        await db.query('CALL ResetDataBase();');
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error resetting database:', error);
+        res.status(500).send('An error occurred while resetting the database.');
+    }
+});
+
 app.get('/models', async function (req, res) {
     try {
         // Retrieve models plus lists for dropdowns
