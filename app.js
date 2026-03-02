@@ -35,7 +35,7 @@ app.get('/', async function (req, res) {
 // RESET DATABASE ROUTE
 app.post('/reset-database', async function (req, res) {
     try {
-        await db.query('CALL ResetDataBase();');
+        await db.query('CALL sp_ResetDataBase();');
         res.redirect('/');
     } catch (error) {
         console.error('Error resetting database:', error);
