@@ -22,7 +22,7 @@
     
 
             {{! DELETE form }}
-            <form id='delete_model_artist_form'>
+            <form id='delete_model_artist_form' method='POST' action='/model-artist/delete'>
                 <input type='hidden' name='delete_model_artist_id' value='{{this.id_model_artist}}' />
                 <td>
                     <button type='submit'>
@@ -37,7 +37,7 @@
 
 {{! CREATE form }}
 <h2>Create a Model-Artist Relationship</h2>
-<form class='cuForm' id='create_model_artist_form'>
+<form class='cuForm' id='create_model_artist_form' method='POST' action='/model-artist/create'>
     <label for='create_model_artist_id_model'>Model ID: </label>
     <select name='create_model_artist_id_model' id='create_model_artist_id_model' required>
         <option value='' disabled selected>Select a Model</option>
@@ -59,7 +59,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Model-Artist Relationship</h2>
-<form class='cuForm' id='update_model_artist_form'>
+<form class='cuForm' id='update_model_artist_form' method='POST' action='/model-artist/update'>
     <label for='update_model_artist_id'>Relationship to Update: </label>
     <select name='update_model_artist_id' id='update_model_artist_id' required>
         <option value='' disabled selected>Select a Relationship</option>
@@ -71,7 +71,7 @@
     </select>
 
     <label for='update_model_artist_id_model'>Model ID: </label>
-    <select name='update_model_artist_id_model' id='update_model_artist_id_model'>
+    <select name='update_model_artist_id_model' id='update_model_artist_id_model' required>
         <option value='' disabled selected>Select a Model</option>
         {{#each models}}
         <option value='{{this.id_model}}'>{{this.id_model}} - {{this.name}}</option>
@@ -79,7 +79,7 @@
     </select>
 
     <label for='update_model_artist_id_artist'>Artist ID: </label>
-    <select name='update_model_artist_id_artist' id='update_model_artist_id_artist'>
+    <select name='update_model_artist_id_artist' id='update_model_artist_id_artist' required>
         <option value='' disabled selected>Select an Artist</option>
         {{#each artists}}
         <option value='{{this.id_artist}}'>{{this.id_artist}} - {{this.first_name}} {{this.last_name}}</option>

@@ -29,7 +29,7 @@
             <td>{{this.is_active}}</td>
 
             {{! DELETE form }}
-            <form id='delete_texture_form'>
+            <form id='delete_texture_form' method='POST' action='/textures/delete'>
                 <input type='hidden' name='delete_texture_id' value='{{this.id_texture}}' />
                 <input type='hidden' name='delete_texture_name' value='{{this.name}}' />
                 <td>
@@ -45,18 +45,24 @@
 
 {{! CREATE form }}
 <h2>Create a Texture</h2>
-<form class='cuForm' id='create_texture_form'>
+<form class='cuForm' id='create_texture_form' method='POST' action='/textures/create'>
     <label for='create_texture_name'>Name: </label>
     <input type='text' name='create_texture_name' id='create_texture_name' required />
 
     <label for='create_texture_description'>Description: </label>
     <input type='text' name='create_texture_description' id='create_texture_description' />
 
+    <label for='create_texture_created_date'>Created Date: </label>
+    <input type='date' name='create_texture_created_date' id='create_texture_created_date' required />
+
+    <label for='create_texture_modified_date'>Modified Date: </label>
+    <input type='date' name='create_texture_modified_date' id='create_texture_modified_date' />
+
     <label for='create_texture_resolution'>Resolution: </label>
-    <input type='text' name='create_texture_resolution' id='create_texture_resolution' />
+    <input type='text' name='create_texture_resolution' id='create_texture_resolution' required />
 
     <label for='create_texture_file_path'>File Path: </label>
-    <input type='text' name='create_texture_file_path' id='create_texture_file_path' />
+    <input type='text' name='create_texture_file_path' id='create_texture_file_path' required />
 
     <label for='create_texture_id_artist'>Artist ID: </label>
     <select name='create_texture_id_artist' id='create_texture_id_artist'>
@@ -69,14 +75,18 @@
     </select>
 
     <label for='create_texture_is_active'>Is Active: </label>
-    <input type='checkbox' name='create_texture_is_active' id='create_texture_is_active' />
+    <select name='create_texture_is_active' id='create_texture_is_active' required >
+        <option value='1' selected>Select</option>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+    </select>
 
     <input type='submit' />
 </form>
 
 {{! UPDATE form }}
 <h2>Update a Texture</h2>
-<form class='cuForm' id='update_texture_form'>
+<form class='cuForm' id='update_texture_form' method='POST' action='/textures/update'>
     <label for='update_texture_id'>Texture to Update: </label>
     <select name='update_texture_id' id='update_texture_id' required>
         <option value='' disabled selected>Select a Texture</option>
@@ -92,11 +102,14 @@
     <label for='update_texture_description'>Description: </label>
     <input type='text' name='update_texture_description' id='update_texture_description' />
 
+    <label for='update_texture_modified_date'>Modified Date: </label>
+    <input type='date' name='update_texture_modified_date' id='update_texture_modified_date' />
+
     <label for='update_texture_resolution'>Resolution: </label>
-    <input type='text' name='update_texture_resolution' id='update_texture_resolution' />
+    <input type='text' name='update_texture_resolution' id='update_texture_resolution' required />
 
     <label for='update_texture_file_path'>File Path: </label>
-    <input type='text' name='update_texture_file_path' id='update_texture_file_path' />
+    <input type='text' name='update_texture_file_path' id='update_texture_file_path' required />
 
     <label for='update_texture_id_artist'>Artist ID: </label>
     <select name='update_texture_id_artist' id='update_texture_id_artist'>
@@ -109,7 +122,11 @@
     </select>
 
     <label for='update_texture_is_active'>Is Active: </label>
-    <input type='checkbox' name='update_texture_is_active' id='update_texture_is_active' />
+    <select name='update_texture_is_active' id='update_texture_is_active' required >
+        <option value='1' disabled selected>Select</option>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+    </select>
 
     <input type='submit' />
 </form>
