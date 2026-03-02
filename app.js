@@ -21,17 +21,6 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // ########################################
 // ########## ROUTE HANDLERS
 
-// READ ROUTES
-app.get('/', async function (req, res) {
-    try {
-        res.render('home'); // Render the home.hbs file
-    } catch (error) {
-        console.error('Error rendering page:', error);
-        // Send a generic error message to the browser
-        res.status(500).send('An error occurred while rendering the page.');
-    }
-});
-
 // RESET DATABASE ROUTE
 app.post('/reset-database', async function (req, res) {
     try {
@@ -40,6 +29,17 @@ app.post('/reset-database', async function (req, res) {
     } catch (error) {
         console.error('Error resetting database:', error);
         res.status(500).send('An error occurred while resetting the database.');
+    }
+});
+
+// READ ROUTES
+app.get('/', async function (req, res) {
+    try {
+        res.render('home'); // Render the home.hbs file
+    } catch (error) {
+        console.error('Error rendering page:', error);
+        // Send a generic error message to the browser
+        res.status(500).send('An error occurred while rendering the page.');
     }
 });
 
@@ -63,11 +63,10 @@ app.get('/models', async function (req, res) {
 app.get('/artists', async function (req, res) {
     try {
         // Create and execute our queries
-        // In query1, we use a JOIN clause to display the names of the homeworlds
         const query1 = 'SELECT * FROM Artists;';
         const [artists] = await db.query(query1);
-        // Render the bsg-people.hbs file, and also send the renderer
-        //  an object that contains our bsg_people and bsg_homeworld information
+        // Render the artists.hbs file, and also send the renderer
+        //  an object that contains artists information
         res.render('artists', { artists: artists });
     } catch (error) {
         console.error('Error executing queries:', error);
