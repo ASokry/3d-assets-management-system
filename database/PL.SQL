@@ -4,6 +4,22 @@ By Ethan Hong and Anthony Sokry
 PL/SQL stored procedures to be used on the database.
 */
 
+# Citation for the following functions: sp_DeleteModelAndArtist, sp_DeleteModel, sp_DeleteMaterial, sp_DeleteTexture, and sp_DeleteArtist
+# Date: 02/23/2026
+# Adapted from: CS340 Canvas Exploration - Implementing CUD operations in your app, Node.js DELETE Stored procedure code
+# Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436
+
+# Citation for the following functions: sp_UpdateModelAndArtist, sp_UpdateModel, sp_UpdateMaterial, sp_UpdateTexture, and sp_UpdateArtist
+# Date: 02/24/2026
+# Adapted from: CS340 Canvas Exploration - Implementing CUD operations in your app, Node.js UPDATE Stored procedure code
+# Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436
+
+# Citation for the following functions: sp_CreateModelAndArtist, sp_CreateModel, sp_CreateMaterial, sp_CreateTexture, and sp_CreateArtist
+# Date: 02/24/2026
+# Adapted from: CS340 Canvas Exploration - Implementing CUD operations in your app, Node.js CREATE Stored procedure code
+# Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436
+
+
 --
 -- CREATE Stored Procedures
 --
