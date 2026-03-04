@@ -1,3 +1,9 @@
+// Citation for the following file: app.js
+// Date: 02/26/2026
+// Adapted from: CS340 Canvas Exploration - Web Application Technology and Exploration - Implementing CUD operations in your app, Node.js code
+// Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436
+
+
 // ########################################
 // ########## SETUP
 
