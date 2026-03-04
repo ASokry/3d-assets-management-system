@@ -18,7 +18,7 @@ CREATE PROCEDURE sp_CreateModelAndArtist(
     IN p_id_artist INT, 
     OUT p_id INT)
 BEGIN
-    INSERT INTO `3D_Models_Has_Artists` (id_model, id_artist) 
+    INSERT IGNORE INTO `3D_Models_Has_Artists` (id_model, id_artist) 
     VALUES (p_id_model, p_id_artist);
 
     -- Store the ID of the last inserted row
@@ -155,7 +155,7 @@ CREATE PROCEDURE sp_UpdateModelAndArtist(
     IN p_id_artist INT
 )
 BEGIN
-    UPDATE `3D_Models_Has_Artists` SET  
+    UPDATE IGNORE `3D_Models_Has_Artists` SET  
         id_model = p_id_model,
         id_artist = p_id_artist
     WHERE id_model_artist = p_id; 
