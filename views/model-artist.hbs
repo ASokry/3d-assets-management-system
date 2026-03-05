@@ -8,7 +8,6 @@
             <th>id_model_artist</th>
             <th>model_name</th>
             <th>artist_full_name</th>
-            <th></th>
         </tr>
     </thead>
 
@@ -19,17 +18,6 @@
             <td>{{this.id_model_artist}}</td>
             <td>{{this.model_name}}</td>
             <td>{{this.artist_full_name}}</td>
-    
-
-            {{! DELETE form }}
-            <form id='delete_model_artist_form' method='POST' action='/model-artist/delete'>
-                <input type='hidden' name='delete_model_artist_id' value='{{this.id_model_artist}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form>
         </tr>
         {{/each}}
     </tbody>
@@ -83,6 +71,22 @@
         <option value='' disabled selected>Select an Artist</option>
         {{#each artists}}
         <option value='{{this.id_artist}}'>{{this.id_artist}} - {{this.first_name}} {{this.last_name}}</option>
+        {{/each}}
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! DELETE form }}
+<h2>Delete a Model-Artist Relationship</h2>
+<form class='cuForm' id='delete_model_artist_form' method='POST' action='/model-artist/delete'>
+    <label for='delete_model_artist_id'>Relationship to Delete: </label>
+    <select name='delete_model_artist_id' id='delete_model_artist_id' required>
+        <option value='' disabled selected>Select a Relationship</option>
+        {{#each modelArtists}}
+        <option value='{{this.id_model_artist}}' required>
+            {{this.id_model_artist}} - {{this.model_name}} / {{this.artist_full_name}}
+        </option>
         {{/each}}
     </select>
 
