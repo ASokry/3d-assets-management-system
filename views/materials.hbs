@@ -10,7 +10,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th></th>
         </tr>
     </thead>
 
@@ -30,17 +29,6 @@
             <td>{{this.file_path}}</td>
             <td>{{this.id_artist}}</td>
             <td>{{this.is_active}}</td>
-
-            {{! DELETE form }}
-            <form id='delete_material_form' method='POST' action='/materials/delete'>
-                <input type='hidden' name='delete_material_id' value='{{this.id_material}}' />
-                <input type='hidden' name='delete_material_name' value='{{this.name}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form>
         </tr>
         {{/each}}
     </tbody>
@@ -147,6 +135,24 @@
         <option value='1' disabled selected>Select</option>
         <option value='1'>Active</option>
         <option value='0'>Inactive</option>
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! DELETE form }}
+<h2>Delete a Material</h2>
+<form class='cuForm' id='delete_material_form' method='POST' action='/materials/delete'>
+    <label for='delete_material_id'>Material to Delete: </label>
+    <select name='delete_material_id' id='delete_material_id' required>
+        <option value='' disabled selected>Select a Material</option>
+        {{#each materials}}
+        <option value='{{this.id_material}}' required>
+            {{this.id_material}}
+            -
+            {{this.name}}
+        </option>
+        {{/each}}
     </select>
 
     <input type='submit' />

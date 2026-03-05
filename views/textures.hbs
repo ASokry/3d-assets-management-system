@@ -10,7 +10,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th></th>
         </tr>
     </thead>
 
@@ -27,17 +26,6 @@
             <td>{{this.file_path}}</td>
             <td>{{this.id_artist}}</td>
             <td>{{this.is_active}}</td>
-
-            {{! DELETE form }}
-            <form id='delete_texture_form' method='POST' action='/textures/delete'>
-                <input type='hidden' name='delete_texture_id' value='{{this.id_texture}}' />
-                <input type='hidden' name='delete_texture_name' value='{{this.name}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form>
         </tr>
         {{/each}}
     </tbody>
@@ -126,6 +114,24 @@
         <option value='1' disabled selected>Select</option>
         <option value='1'>Active</option>
         <option value='0'>Inactive</option>
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! DELETE form }}
+<h2>Delete a Texture</h2>
+<form class='cuForm' id='delete_texture_form' method='POST' action='/textures/delete'>
+    <label for='delete_texture_id'>Texture to Delete: </label>
+    <select name='delete_texture_id' id='delete_texture_id' required>
+        <option value='' disabled selected>Select a Texture</option>
+        {{#each textures}}
+        <option value='{{this.id_texture}}' required>
+            {{this.id_texture}}
+            -
+            {{this.name}}
+        </option>
+        {{/each}}
     </select>
 
     <input type='submit' />
