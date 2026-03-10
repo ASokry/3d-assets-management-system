@@ -28,7 +28,7 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // ########## ROUTE HANDLERS
 
 // RESET DATABASE ROUTE
-app.post('/reset-database', async function (req, res) {
+app.get('/reset-database', async function (req, res) {
     try {
         await db.query('CALL sp_ResetDataBase();');
         res.redirect('/');
