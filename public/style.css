@@ -4,6 +4,7 @@ Date: 03/10/2026
 Adapted from: CS340 Canvas Exploration - Web Application Technology, Node.js starter code
 Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419 
 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 h1, h2 { margin-left: 16px;}
 table {border-collapse: collapse;margin-left: 32px;}
@@ -16,6 +17,44 @@ th {background-color: #f2f2f2;}
 tr:nth-child(even) {background-color: #f9f9f9;}
 .cuForm { margin-left: 32px;}
 input, select { margin-bottom: 4px;margin-right: 12px;}
-nav {background-color: #cecece;padding: 16px;}
 a {margin-left: 16px;}
 .homepageDescription {margin-left: 32px;}
+
+#navbar {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    max-width: 60%;
+    padding: 16px;
+    padding-right: calc(30px / 2);
+    padding-left: calc(30px / 2);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#navbar a:link, #navbar a:visited, #navbar a:hover, #navbar a:active {
+    text-decoration: none;
+}
+
+#navbar a:link, #navbar a:visited {
+    color: #038d8f;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+}
+
+#navbar a:hover, #navbar a:active {
+    color: #e27200;
+}
+
+#reset_button {
+    color: #fff !important;
+    background-color: #038d8f;
+    border-radius: 15px;
+    margin-left: auto;
+    padding: 0.5em;
+}
+
+#reset_button:hover, #reset_button:active {
+    background-color: #e27200 !important;
+}
