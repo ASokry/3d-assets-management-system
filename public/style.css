@@ -6,7 +6,6 @@ Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web
 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-h1, h2 { margin-left: 16px;}
 table {border-collapse: collapse;margin-left: 32px;}
 th, td {
     border: 1px solid #ddd;
@@ -17,17 +16,30 @@ th {background-color: #f2f2f2;}
 tr:nth-child(even) {background-color: #f9f9f9;}
 .cuForm { margin-left: 32px;}
 input, select { margin-bottom: 4px;margin-right: 12px;}
-.homepageDescription {margin-left: 32px;}
 
 body {
+    position: relative;
     display: grid;
     grid-template-columns: 225px auto;
     min-height: 100vh;
     margin: 0;
+    font-family: "Inter", sans-serif;
 }
+
 main {
     grid-column: 2;
-    margin: 0px 5px;
+    margin: 0px 16px;
+    position: relative;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #038d8f;
+    font-weight: bold;
+}
+
+a:hover, a:active {
+    color: #e27200;
 }
 
 #navbar {
@@ -40,23 +52,12 @@ main {
 }
 
 #navbar a:link, #navbar a:visited, #navbar a:hover, #navbar a:active {
-    text-decoration: none;
     margin-right: auto;
     margin-left: 16px;
     margin-top: 5px;
 }
 
-#navbar a:link, #navbar a:visited {
-    color: #038d8f;
-    font-family: "Inter", sans-serif;
-    font-weight: bold;
-}
-
-#navbar a:hover, #navbar a:active {
-    color: #e27200;
-}
-
-#reset_button {
+#resetButton {
     color: #fff !important;
     background-color: #038d8f;
     border-radius: 15px;
@@ -65,6 +66,49 @@ main {
     box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-#reset_button:hover, #reset_button:active {
+#resetButton:hover, #resetButton:active {
     background-color: #e27200 !important;
+}
+
+.homeTitle {
+    margin-bottom: 3px;
+}
+
+.authors {
+    margin-top: 2px;
+    font-style: italic;
+    color: #2A3439;
+}
+
+.description {
+    font-size: 1.5rem;
+}
+
+.homeTables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 100%;
+}
+
+.tabelCard {
+    border: solid black;
+    padding: 20px;
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+}
+
+.tabelCard > a {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 10px;
 }
