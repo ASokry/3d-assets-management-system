@@ -17,24 +17,33 @@ th {background-color: #f2f2f2;}
 tr:nth-child(even) {background-color: #f9f9f9;}
 .cuForm { margin-left: 32px;}
 input, select { margin-bottom: 4px;margin-right: 12px;}
-a {margin-left: 16px;}
 .homepageDescription {margin-left: 32px;}
 
+body {
+    display: grid;
+    grid-template-columns: 225px auto;
+    min-height: 100vh;
+    margin: 0;
+}
+main {
+    grid-column: 2;
+    margin: 0px 5px;
+}
+
 #navbar {
-    align-items: center;
+    grid-column: 1;
     display: flex;
-    justify-content: flex-start;
-    height: 100%;
-    max-width: 60%;
-    padding: 16px;
-    padding-right: calc(30px / 2);
-    padding-left: calc(30px / 2);
-    margin-right: auto;
-    margin-left: auto;
+    flex-direction: column;
+    margin-right: 10px;
+    padding: 20px 0px;
+    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 #navbar a:link, #navbar a:visited, #navbar a:hover, #navbar a:active {
     text-decoration: none;
+    margin-right: auto;
+    margin-left: 16px;
+    margin-top: 5px;
 }
 
 #navbar a:link, #navbar a:visited {
@@ -51,8 +60,9 @@ a {margin-left: 16px;}
     color: #fff !important;
     background-color: #038d8f;
     border-radius: 15px;
-    margin-left: auto;
+    margin-top: auto !important;
     padding: 0.5em;
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 #reset_button:hover, #reset_button:active {
