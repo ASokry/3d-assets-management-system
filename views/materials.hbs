@@ -5,6 +5,14 @@
     Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419
 --}}
 
+{{!-- 
+    Citation for use of AI Tools:
+    Date: 03/12/2026
+    Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+    Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+    AI Source URL: google.com/ai 
+ --}}
+
 <h1>Materials</h1>
 
 {{! READ table }}
@@ -12,11 +20,18 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each materials.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created On</th>
+            <th>Modified On</th>
+            <th>Base Color</th>
+            <th>Roughness</th>
+            <th>Metallic</th>
+            <th>Transparency</th>
+            <th>File Path</th>
+            <th>Artist</th>
+            <th>Active</th>
         </tr>
     </thead>
 
@@ -24,18 +39,18 @@
         {{! For each row, print the material attributes }}
         {{#each materials}}
         <tr>
-            <td>{{this.id_material}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
-            <td>{{this.created_date}}</td>
-            <td>{{this.modified_date}}</td>
-            <td>{{this.base_color}}</td>
-            <td>{{this.roughness}}</td>
-            <td>{{this.metallic}}</td>
-            <td>{{this.transparency}}</td>
-            <td>{{this.file_path}}</td>
-            <td>{{this.id_artist}}</td>
-            <td>{{this.is_active}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Description}}</td>
+            <td>{{this.[Created On]}}</td>
+            <td>{{this.[Modified On]}}</td>
+            <td>{{this.[Base Color]}}</td>
+            <td>{{this.Roughness}}</td>
+            <td>{{this.Metallic}}</td>
+            <td>{{this.Transparency}}</td>
+            <td>{{this.[File Path]}}</td>
+            <td>{{this.Artist}}</td>
+            <td>{{#if this.Active}}YES{{else}}NO{{/if}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -86,7 +101,7 @@
 
         <label for='create_material_is_active'>Is Active: </label>
         <select name='create_material_is_active' id='create_material_is_active' required >
-            <option value='1' selected>Select</option>
+            <option value='' selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -102,10 +117,17 @@
         <select name='update_material_id' id='update_material_id' required>
             <option value='' disabled selected>Select a Material</option>
             {{#each materials}}
-            <option value='{{this.id_material}}' required>
-                {{this.id_material}}
-                -
-                {{this.name}}
+            <option value="{{this.ID}}"
+                data-description="{{this.Description}}" 
+                data-modified-date="{{this.[Modified On]}}"
+                data-base-color="{{this.[Base Color]}}"
+                data-roughness="{{this.Roughness}}"
+                data-metallic="{{this.Metallic}}"
+                data-transparency="{{this.Transparency}}"
+                data-file-path="{{this.[File Path]}}"
+                data-artist="{{this.ArtistID}}"
+                data-active="{{this.Active}}">
+                {{this.ID}} - {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -143,7 +165,7 @@
 
         <label for='update_material_is_active'>Is Active: </label>
         <select name='update_material_is_active' id='update_material_is_active' required >
-            <option value='1' disabled selected>Select</option>
+            <option value='' disabled selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -159,10 +181,10 @@
         <select name='delete_material_id' id='delete_material_id' required>
             <option value='' disabled selected>Select a Material</option>
             {{#each materials}}
-            <option value='{{this.id_material}}' required>
-                {{this.id_material}}
+            <option value='{{this.ID}}' required>
+                {{this.ID}}
                 -
-                {{this.name}}
+                {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -170,3 +192,47 @@
         <input type='submit' class="submit"/>
     </form>
 </div>
+
+{{!-- Auto Populate --}}
+<script>
+    const materialSelect = document.getElementById('update_material_id');
+    const descriptionInput = document.getElementById('update_material_description');
+    const modifiedDateInput = document.getElementById('update_material_modified_date');
+    const baseColorInput = document.getElementById('update_material_base_color');
+    const roughnessInput = document.getElementById('update_material_roughness');
+    const metallicInput = document.getElementById('update_material_metallic');
+    const transparencyInput = document.getElementById('update_material_transparency');
+    const filePathInput = document.getElementById('update_material_file_path');
+    const artistInput = document.getElementById('update_material_id_artist');
+    const activeInput = document.getElementById('update_material_is_active');
+
+    materialSelect.addEventListener('change', function() {
+        // Get the currently selected option element
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Pull the data attributes we added in Step 1
+        const description = selectedOption.getAttribute('data-description');
+        const modifiedDate = selectedOption.getAttribute('data-modified-date');
+        const baseColor = selectedOption.getAttribute('data-base-color');
+        const roughness = selectedOption.getAttribute('data-roughness');
+        const metallic = selectedOption.getAttribute('data-metallic');
+        const transparency = selectedOption.getAttribute('data-transparency');
+        const filePath = selectedOption.getAttribute('data-file-path');
+        const artist = selectedOption.getAttribute('data-artist');
+        const active = selectedOption.getAttribute('data-active');
+
+        const mdParts = modifiedDate.split('/');
+        const mdFormatted = `${mdParts[2]}-${mdParts[1]}-${mdParts[0]}`; 
+
+        // Populate the input fields
+        descriptionInput.value = description || '';
+        modifiedDateInput.value = mdFormatted || '';
+        baseColorInput.value = baseColor || '';
+        roughnessInput.value = roughness || '';
+        metallicInput.value = metallic || '';
+        transparencyInput.value = transparency || '';
+        filePathInput.value = filePath || '';
+        artistInput.value = artist || '';
+        activeInput.value = active || '';
+    });
+</script>

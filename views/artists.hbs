@@ -5,6 +5,14 @@
     Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419
 --}}
 
+{{!-- 
+    Citation for use of AI Tools:
+    Date: 03/12/2026
+    Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+    Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+    AI Source URL: google.com/ai 
+ --}}
+
 <h1>Artists</h1>
 
 {{! READ table }}
@@ -24,11 +32,11 @@
         {{! For each row, print the artist attributes }}
         {{#each artists}}
         <tr>
-            <td>{{this.id_artist}}</td>
-            <td>{{this.first_name}}</td>
-            <td>{{this.last_name}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.phone}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.[First Name]}}</td>
+            <td>{{this.[Last Name]}}</td>
+            <td>{{this.Email}}</td>
+            <td>{{this.Phone}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -62,11 +70,8 @@
         <select name='update_artist_id' id='update_artist_id' required>
             <option value='' disabled selected>Select an Artist</option>
             {{#each artists}}
-            <option value='{{this.id_artist}}' required>
-                {{this.id_artist}}
-                -
-                {{this.first_name}}
-                {{this.last_name}}
+            <option value="{{this.ID}}" data-email="{{this.Email}}" data-phone="{{this.Phone}}">
+                {{this.ID}} - {{this.[First Name]}} {{this.[Last Name]}}
             </option>
             {{/each}}
         </select>
@@ -88,11 +93,11 @@
         <select name='delete_artist_id' id='delete_artist_id' required>
             <option value='' disabled selected>Select an Artist</option>
             {{#each artists}}
-            <option value='{{this.id_artist}}' required>
-                {{this.id_artist}}
+            <option value='{{this.ID}}' required>
+                {{this.ID}}
                 -
-                {{this.first_name}}
-                {{this.last_name}}
+                {{this.[First Name]}}
+                {{this.[Last Name]}}
             </option>
             {{/each}}
         </select>
@@ -100,3 +105,23 @@
         <input type='submit' class="submit"/>
     </form>
 </div>
+
+{{!-- Auto Populate --}}
+<script>
+    const artistSelect = document.getElementById('update_artist_id');
+    const emailInput = document.getElementById('update_artist_email');
+    const phoneInput = document.getElementById('update_artist_phone');
+
+    artistSelect.addEventListener('change', function() {
+        // Get the currently selected option element
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Pull the data attributes we added in Step 1
+        const email = selectedOption.getAttribute('data-email');
+        const phone = selectedOption.getAttribute('data-phone');
+
+        // Populate the input fields
+        emailInput.value = email || '';
+        phoneInput.value = phone || '';
+    });
+</script>

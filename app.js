@@ -53,11 +53,20 @@ app.get('/models', async function (req, res) {
     try {
         // Retrieve models plus lists for dropdowns
         const query1 = `SELECT 
-                            id_model, name, description,
-                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
-                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date,
-                            file_path, is_active, id_material, id_texture 
-                        FROM 3D_Models;`;
+                            m.id_model AS ID, 
+                            m.name AS Name, 
+                            m.description AS Description,
+                            DATE_FORMAT(m.created_date, '%d/%m/%Y') AS "Created On",
+                            DATE_FORMAT(m.modified_date, '%d/%m/%Y') AS "Modified On",
+                            m.file_path AS "File Path", 
+                            m.is_active AS Active, 
+                            mat.name AS Material,
+                            m.id_material AS MaterialID, 
+                            text.name AS Texture,
+                            m.id_texture AS TextureID
+                        FROM 3D_Models m
+                        LEFT JOIN Materials mat ON m.id_material = mat.id_material
+                        LEFT JOIN Textures text ON m.id_texture = text.id_texture;`;
         const [models] = await db.query(query1);
         const [materials] = await db.query('SELECT id_material, name FROM Materials;');
         const [textures] = await db.query('SELECT id_texture, name FROM Textures;');
@@ -74,7 +83,13 @@ app.get('/models', async function (req, res) {
 app.get('/artists', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = 'SELECT * FROM Artists;';
+        const query1 = `SELECT
+                            id_artist AS ID,
+                            first_name AS "First Name",
+                            last_name AS "Last Name",
+                            email AS Email,
+                            phone AS Phone
+                        FROM Artists;`;
         const [artists] = await db.query(query1);
         // Render the artists.hbs file, and also send the renderer
         //  an object that contains artists information
@@ -92,12 +107,21 @@ app.get('/materials', async function (req, res) {
     try {
         // Retrieve materials and artist list for dropdowns
         const query1 = `SELECT 
-                            id_material, name, description, 
-                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
-                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date, 
-                            base_color, roughness, metallic, transparency, 
-                            file_path, id_artist, is_active
-                        FROM Materials;`;
+                            mat.id_material AS ID, 
+                            mat.name AS Name, 
+                            mat.description AS Description, 
+                            DATE_FORMAT(mat.created_date, '%d/%m/%Y') AS "Created On",
+                            DATE_FORMAT(mat.modified_date, '%d/%m/%Y') AS "Modified On", 
+                            mat.base_color AS "Base Color", 
+                            mat.roughness AS Roughness, 
+                            mat.metallic AS Metallic, 
+                            mat.transparency AS Transparency, 
+                            mat.file_path AS "File Path", 
+                            CONCAT(a.first_name, ' ', a.last_name) AS Artist,
+                            mat.id_artist AS ArtistID, 
+                            mat.is_active AS Active
+                        FROM Materials mat
+                        LEFT JOIN Artists a ON mat.id_artist = a.id_artist;`;
         const [materials] = await db.query(query1);
         const [artists] = await db.query('SELECT id_artist, first_name, last_name FROM Artists;');
         // Render the view with both datasets
@@ -115,11 +139,18 @@ app.get('/textures', async function (req, res) {
     try {
         // Retrieve textures and artist list for dropdowns
         const query1 = `SELECT
-                            id_texture, name, description, 
-                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
-                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date, 
-                            resolution, file_path, id_artist, is_active
-                        FROM Textures;`;
+                            text.id_texture AS ID, 
+                            text.name AS Name, 
+                            text.description AS Description, 
+                            DATE_FORMAT(text.created_date, '%d/%m/%Y') AS "Created On",
+                            DATE_FORMAT(text.modified_date, '%d/%m/%Y') AS "Modified On", 
+                            text.resolution AS Resolution, 
+                            text.file_path AS "File Path", 
+                            CONCAT(a.first_name, ' ', a.last_name) AS Artist,
+                            text.id_artist AS ArtistID,
+                            text.is_active AS Active
+                        FROM Textures text
+                        LEFT JOIN Artists a ON text.id_artist = a.id_artist;`;
         const [textures] = await db.query(query1);
         const [artists] = await db.query('SELECT id_artist, first_name, last_name FROM Artists;');
         res.render('textures', { textures: textures, artists: artists });
@@ -137,14 +168,14 @@ app.get('/model-artist', async function (req, res) {
         // Create and execute our queries
         // In query1, we use JOIN clauses to display model-artist relationships
         const query1 = `SELECT 
-                            mha.id_model_artist, 
-                            m.name AS model_name, 
-                            CONCAT(a.first_name, ' ', a.last_name) AS artist_full_name,
-                            mha.id_model,
-                            mha.id_artist
+                            mha.id_model_artist AS ID, 
+                            m.name AS Model, 
+                            CONCAT(a.first_name, ' ', a.last_name) AS Artist,
+                            mha.id_model AS ModelID,
+                            mha.id_artist AS ArtistID
                         FROM 3D_Models_Has_Artists mha
-                        JOIN 3D_Models m ON mha.id_model = m.id_model
-                        JOIN Artists a ON mha.id_artist = a.id_artist;`;
+                        LEFT JOIN 3D_Models m ON mha.id_model = m.id_model
+                        LEFT JOIN Artists a ON mha.id_artist = a.id_artist;`;
         const [modelArtists] = await db.query(query1);
         const [artists] = await db.query('SELECT id_artist, first_name, last_name FROM Artists;');
         const [models] = await db.query('SELECT id_model, name FROM 3D_Models;');

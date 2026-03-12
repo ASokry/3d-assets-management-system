@@ -5,6 +5,14 @@
     Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419
 --}}
 
+{{!-- 
+    Citation for use of AI Tools:
+    Date: 03/12/2026
+    Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+    Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+    AI Source URL: google.com/ai 
+ --}}
+
 <h1>Textures</h1>
 
 {{! READ table }}
@@ -12,11 +20,15 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each textures.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created On</th>
+            <th>Modified On</th>
+            <th>Resolution</th>
+            <th>File Path</th>
+            <th>Artist</th>
+            <th>Active</th>
         </tr>
     </thead>
 
@@ -24,15 +36,15 @@
         {{! For each row, print the texture attributes }}
         {{#each textures}}
         <tr>
-            <td>{{this.id_texture}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
-            <td>{{this.created_date}}</td>
-            <td>{{this.modified_date}}</td>
-            <td>{{this.resolution}}</td>
-            <td>{{this.file_path}}</td>
-            <td>{{this.id_artist}}</td>
-            <td>{{this.is_active}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Description}}</td>
+            <td>{{this.[Created On]}}</td>
+            <td>{{this.[Modified On]}}</td>
+            <td>{{this.Resolution}}</td>
+            <td>{{this.[File Path]}}</td>
+            <td>{{this.Artist}}</td>
+            <td>{{#if this.Active}}YES{{else}}NO{{/if}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -73,7 +85,7 @@
 
         <label for='create_texture_is_active'>Is Active: </label>
         <select name='create_texture_is_active' id='create_texture_is_active' required >
-            <option value='1' selected>Select</option>
+            <option value='' selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -89,10 +101,14 @@
         <select name='update_texture_id' id='update_texture_id' required>
             <option value='' disabled selected>Select a Texture</option>
             {{#each textures}}
-            <option value='{{this.id_texture}}' required>
-                {{this.id_texture}}
-                -
-                {{this.name}}
+            <option value="{{this.ID}}"
+                data-description="{{this.Description}}" 
+                data-modified-date="{{this.[Modified On]}}"
+                data-resolution="{{this.Resolution}}"
+                data-file-path="{{this.[File Path]}}"
+                data-artist="{{this.ArtistID}}"
+                data-active="{{this.Active}}">
+                {{this.ID}} - {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -121,7 +137,7 @@
 
         <label for='update_texture_is_active'>Is Active: </label>
         <select name='update_texture_is_active' id='update_texture_is_active' required >
-            <option value='1' disabled selected>Select</option>
+            <option value='' disabled selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -137,10 +153,10 @@
         <select name='delete_texture_id' id='delete_texture_id' required>
             <option value='' disabled selected>Select a Texture</option>
             {{#each textures}}
-            <option value='{{this.id_texture}}' required>
-                {{this.id_texture}}
+            <option value='{{this.ID}}' required>
+                {{this.ID}}
                 -
-                {{this.name}}
+                {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -148,3 +164,38 @@
         <input type='submit' class="submit"/>
     </form>
 </div>
+
+{{!-- Auto Populate --}}
+<script>
+    const textureSelect = document.getElementById('update_texture_id');
+    const descriptionInput = document.getElementById('update_texture_description');
+    const modifiedDateInput = document.getElementById('update_texture_modified_date');
+    const resolutionInput = document.getElementById('update_texture_resolution');
+    const filePathInput = document.getElementById('update_texture_file_path');
+    const artistInput = document.getElementById('update_texture_id_artist');
+    const activeInput = document.getElementById('update_texture_is_active');
+
+    textureSelect.addEventListener('change', function() {
+        // Get the currently selected option element
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Pull the data attributes we added in Step 1
+        const description = selectedOption.getAttribute('data-description');
+        const modifiedDate = selectedOption.getAttribute('data-modified-date');
+        const resolution = selectedOption.getAttribute('data-resolution');
+        const filePath = selectedOption.getAttribute('data-file-path');
+        const artist = selectedOption.getAttribute('data-artist');
+        const active = selectedOption.getAttribute('data-active');
+
+        const mdParts = modifiedDate.split('/');
+        const mdFormatted = `${mdParts[2]}-${mdParts[1]}-${mdParts[0]}`; 
+
+        // Populate the input fields
+        descriptionInput.value = description || '';
+        modifiedDateInput.value = mdFormatted || '';
+        resolutionInput.value = resolution || '';
+        filePathInput.value = filePath || '';
+        artistInput.value = artist || '';
+        activeInput.value = active || '';
+    });
+</script>
