@@ -34,64 +34,69 @@
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create an Artist</h2>
-<form class='cuForm' id='create_artist_form' method='POST' action='/artists/create'>
-    <label for='create_artist_first_name'>First Name: </label>
-    <input type='text' name='create_artist_first_name' id='create_artist_first_name' required />
+<div class="gridForm">
+    {{! CREATE form }}
+    <form class='cuForm' id='create_artist_form' method='POST' action='/artists/create'>
+        <h2>Create an Artist</h2>
 
-    <label for='create_artist_last_name'>Last Name: </label>
-    <input type='text' name='create_artist_last_name' id='create_artist_last_name' required />
+        <label for='create_artist_first_name'>First Name: </label>
+        <input type='text' name='create_artist_first_name' id='create_artist_first_name' required />
 
-    <label for='create_artist_email'>Email: </label>
-    <input type='email' name='create_artist_email' id='create_artist_email' required />
+        <label for='create_artist_last_name'>Last Name: </label>
+        <input type='text' name='create_artist_last_name' id='create_artist_last_name' required />
 
-    <label for='create_artist_phone'>Phone: </label>
-    <input type='text' name='create_artist_phone' id='create_artist_phone' />
+        <label for='create_artist_email'>Email: </label>
+        <input type='email' name='create_artist_email' id='create_artist_email' required />
 
-    <input type='submit' />
-</form>
+        <label for='create_artist_phone'>Phone: </label>
+        <input type='text' name='create_artist_phone' id='create_artist_phone' />
 
-{{! UPDATE form }}
-<h2>Update an Artist</h2>
-<form class='cuForm' id='update_artist_form' method='POST' action='/artists/update'>
-    <label for='update_artist_id'>Artist to Update: </label>
-    <select name='update_artist_id' id='update_artist_id' required>
-        <option value='' disabled selected>Select an Artist</option>
-        {{#each artists}}
-        <option value='{{this.id_artist}}' required>
-            {{this.id_artist}}
-            -
-            {{this.first_name}}
-            {{this.last_name}}
-        </option>
-        {{/each}}
-    </select>
+        <input type='submit' class="submit"/>
+    </form>
 
-    <label for='update_artist_email'>Email: </label>
-    <input type='email' name='update_artist_email' id='update_artist_email' required />
+    {{! UPDATE form }}
+    <form class='cuForm' id='update_artist_form' method='POST' action='/artists/update'>
+        <h2>Update an Artist</h2>
 
-    <label for='update_artist_phone'>Phone: </label>
-    <input type='text' name='update_artist_phone' id='update_artist_phone' />
+        <label for='update_artist_id'>Artist to Update: </label>
+        <select name='update_artist_id' id='update_artist_id' required>
+            <option value='' disabled selected>Select an Artist</option>
+            {{#each artists}}
+            <option value='{{this.id_artist}}' required>
+                {{this.id_artist}}
+                -
+                {{this.first_name}}
+                {{this.last_name}}
+            </option>
+            {{/each}}
+        </select>
 
-    <input type='submit' />
-</form>
+        <label for='update_artist_email'>Email: </label>
+        <input type='email' name='update_artist_email' id='update_artist_email' required />
 
-{{! DELETE form }}
-<h2>Delete an Artist</h2>
-<form class='cuForm' id='delete_artist_form' method='POST' action='/artists/delete'>
-    <label for='delete_artist_id'>Artist to Delete: </label>
-    <select name='delete_artist_id' id='delete_artist_id' required>
-        <option value='' disabled selected>Select an Artist</option>
-        {{#each artists}}
-        <option value='{{this.id_artist}}' required>
-            {{this.id_artist}}
-            -
-            {{this.first_name}}
-            {{this.last_name}}
-        </option>
-        {{/each}}
-    </select>
+        <label for='update_artist_phone'>Phone: </label>
+        <input type='text' name='update_artist_phone' id='update_artist_phone' />
 
-    <input type='submit' />
-</form>
+        <input type='submit' class="submit"/>
+    </form>
+
+    {{! DELETE form }}
+    <form class='cuForm' id='delete_artist_form' method='POST' action='/artists/delete'>
+        <h2>Delete an Artist</h2>
+
+        <label for='delete_artist_id'>Artist to Delete: </label>
+        <select name='delete_artist_id' id='delete_artist_id' required>
+            <option value='' disabled selected>Select an Artist</option>
+            {{#each artists}}
+            <option value='{{this.id_artist}}' required>
+                {{this.id_artist}}
+                -
+                {{this.first_name}}
+                {{this.last_name}}
+            </option>
+            {{/each}}
+        </select>
+
+        <input type='submit' class="submit"/>
+    </form>
+</div>
