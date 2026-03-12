@@ -38,108 +38,113 @@
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create a Texture</h2>
-<form class='cuForm' id='create_texture_form' method='POST' action='/textures/create'>
-    <label for='create_texture_name'>Name: </label>
-    <input type='text' name='create_texture_name' id='create_texture_name' required />
+<div class="gridForm">
+    {{! CREATE form }}
+    <form class='cuForm' id='create_texture_form' method='POST' action='/textures/create'>
+        <h2>Create a Texture</h2>
 
-    <label for='create_texture_description'>Description: </label>
-    <input type='text' name='create_texture_description' id='create_texture_description' />
+        <label for='create_texture_name'>Name: </label>
+        <input type='text' name='create_texture_name' id='create_texture_name' required />
 
-    <label for='create_texture_created_date'>Created Date: </label>
-    <input type='date' name='create_texture_created_date' id='create_texture_created_date' required />
+        <label for='create_texture_description'>Description: </label>
+        <input type='text' name='create_texture_description' id='create_texture_description' />
 
-    <label for='create_texture_modified_date'>Modified Date: </label>
-    <input type='date' name='create_texture_modified_date' id='create_texture_modified_date' />
+        <label for='create_texture_created_date'>Created Date: </label>
+        <input type='date' name='create_texture_created_date' id='create_texture_created_date' required />
 
-    <label for='create_texture_resolution'>Resolution: </label>
-    <input type='text' name='create_texture_resolution' id='create_texture_resolution' required />
+        <label for='create_texture_modified_date'>Modified Date: </label>
+        <input type='date' name='create_texture_modified_date' id='create_texture_modified_date' />
 
-    <label for='create_texture_file_path'>File Path: </label>
-    <input type='text' name='create_texture_file_path' id='create_texture_file_path' required />
+        <label for='create_texture_resolution'>Resolution: </label>
+        <input type='text' name='create_texture_resolution' id='create_texture_resolution' required />
 
-    <label for='create_texture_id_artist'>Artist ID: </label>
-    <select name='create_texture_id_artist' id='create_texture_id_artist'>
-        <option value='' disabled selected>Select an Artist</option>
-        {{#each artists}}
-        <option value='{{this.id_artist}}'>
-            {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
-        </option>
-        {{/each}}
-    </select>
+        <label for='create_texture_file_path'>File Path: </label>
+        <input type='text' name='create_texture_file_path' id='create_texture_file_path' required />
 
-    <label for='create_texture_is_active'>Is Active: </label>
-    <select name='create_texture_is_active' id='create_texture_is_active' required >
-        <option value='1' selected>Select</option>
-        <option value='1'>Active</option>
-        <option value='0'>Inactive</option>
-    </select>
+        <label for='create_texture_id_artist'>Artist ID: </label>
+        <select name='create_texture_id_artist' id='create_texture_id_artist'>
+            <option value='' disabled selected>Select an Artist</option>
+            {{#each artists}}
+            <option value='{{this.id_artist}}'>
+                {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
+            </option>
+            {{/each}}
+        </select>
 
-    <input type='submit' />
-</form>
+        <label for='create_texture_is_active'>Is Active: </label>
+        <select name='create_texture_is_active' id='create_texture_is_active' required >
+            <option value='1' selected>Select</option>
+            <option value='1'>Active</option>
+            <option value='0'>Inactive</option>
+        </select>
 
-{{! UPDATE form }}
-<h2>Update a Texture</h2>
-<form class='cuForm' id='update_texture_form' method='POST' action='/textures/update'>
-    <label for='update_texture_id'>Texture to Update: </label>
-    <select name='update_texture_id' id='update_texture_id' required>
-        <option value='' disabled selected>Select a Texture</option>
-        {{#each textures}}
-        <option value='{{this.id_texture}}' required>
-            {{this.id_texture}}
-            -
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
+        <input type='submit' class="submit"/>
+    </form>
 
-    <label for='update_texture_description'>Description: </label>
-    <input type='text' name='update_texture_description' id='update_texture_description' />
+    {{! UPDATE form }}
+    <form class='cuForm' id='update_texture_form' method='POST' action='/textures/update'>
+        <h2>Update a Texture</h2>
 
-    <label for='update_texture_modified_date'>Modified Date: </label>
-    <input type='date' name='update_texture_modified_date' id='update_texture_modified_date' />
+        <label for='update_texture_id'>Texture to Update: </label>
+        <select name='update_texture_id' id='update_texture_id' required>
+            <option value='' disabled selected>Select a Texture</option>
+            {{#each textures}}
+            <option value='{{this.id_texture}}' required>
+                {{this.id_texture}}
+                -
+                {{this.name}}
+            </option>
+            {{/each}}
+        </select>
 
-    <label for='update_texture_resolution'>Resolution: </label>
-    <input type='text' name='update_texture_resolution' id='update_texture_resolution' required />
+        <label for='update_texture_description'>Description: </label>
+        <input type='text' name='update_texture_description' id='update_texture_description' />
 
-    <label for='update_texture_file_path'>File Path: </label>
-    <input type='text' name='update_texture_file_path' id='update_texture_file_path' required />
+        <label for='update_texture_modified_date'>Modified Date: </label>
+        <input type='date' name='update_texture_modified_date' id='update_texture_modified_date' />
 
-    <label for='update_texture_id_artist'>Artist ID: </label>
-    <select name='update_texture_id_artist' id='update_texture_id_artist'>
-        <option value='' disabled selected>Select an Artist</option>
-        {{#each artists}}
-        <option value='{{this.id_artist}}'>
-            {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
-        </option>
-        {{/each}}
-    </select>
+        <label for='update_texture_resolution'>Resolution: </label>
+        <input type='text' name='update_texture_resolution' id='update_texture_resolution' required />
 
-    <label for='update_texture_is_active'>Is Active: </label>
-    <select name='update_texture_is_active' id='update_texture_is_active' required >
-        <option value='1' disabled selected>Select</option>
-        <option value='1'>Active</option>
-        <option value='0'>Inactive</option>
-    </select>
+        <label for='update_texture_file_path'>File Path: </label>
+        <input type='text' name='update_texture_file_path' id='update_texture_file_path' required />
 
-    <input type='submit' />
-</form>
+        <label for='update_texture_id_artist'>Artist ID: </label>
+        <select name='update_texture_id_artist' id='update_texture_id_artist'>
+            <option value='' disabled selected>Select an Artist</option>
+            {{#each artists}}
+            <option value='{{this.id_artist}}'>
+                {{this.id_artist}} - {{this.first_name}} {{this.last_name}}
+            </option>
+            {{/each}}
+        </select>
 
-{{! DELETE form }}
-<h2>Delete a Texture</h2>
-<form class='cuForm' id='delete_texture_form' method='POST' action='/textures/delete'>
-    <label for='delete_texture_id'>Texture to Delete: </label>
-    <select name='delete_texture_id' id='delete_texture_id' required>
-        <option value='' disabled selected>Select a Texture</option>
-        {{#each textures}}
-        <option value='{{this.id_texture}}' required>
-            {{this.id_texture}}
-            -
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
+        <label for='update_texture_is_active'>Is Active: </label>
+        <select name='update_texture_is_active' id='update_texture_is_active' required >
+            <option value='1' disabled selected>Select</option>
+            <option value='1'>Active</option>
+            <option value='0'>Inactive</option>
+        </select>
 
-    <input type='submit' />
-</form>
+        <input type='submit' class="submit"/>
+    </form>
+
+    {{! DELETE form }}
+    <form class='cuForm' id='delete_texture_form' method='POST' action='/textures/delete'>
+        <h2>Delete a Texture</h2>
+
+        <label for='delete_texture_id'>Texture to Delete: </label>
+        <select name='delete_texture_id' id='delete_texture_id' required>
+            <option value='' disabled selected>Select a Texture</option>
+            {{#each textures}}
+            <option value='{{this.id_texture}}' required>
+                {{this.id_texture}}
+                -
+                {{this.name}}
+            </option>
+            {{/each}}
+        </select>
+
+        <input type='submit' class="submit"/>
+    </form>
+</div>

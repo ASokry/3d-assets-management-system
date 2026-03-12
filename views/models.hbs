@@ -38,114 +38,119 @@
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create a Model</h2>
-<form class='cuForm' id='create_model_form' method='POST' action='/models/create'>
-    <label for='create_model_name'>Name: </label>
-    <input type='text' name='create_model_name' id='create_model_name' required />
+<div class="gridForm">
+    {{! CREATE form }}
+    <form class='cuForm' id='create_model_form' method='POST' action='/models/create'>
+        <h2>Create a Model</h2>
 
-    <label for='create_model_description'>Description: </label>
-    <input type='text' name='create_model_description' id='create_model_description' />
+        <label for='create_model_name'>Name: </label>
+        <input type='text' name='create_model_name' id='create_model_name' required />
 
-    <label for='create_model_created_date'>Created Date: </label>
-    <input type='date' name='create_model_created_date' id='create_model_created_date' required />
+        <label for='create_model_description'>Description: </label>
+        <input type='text' name='create_model_description' id='create_model_description' />
 
-    <label for='create_model_modified_date'>Modified Date: </label>
-    <input type='date' name='create_model_modified_date' id='create_model_modified_date' />
+        <label for='create_model_created_date'>Created Date: </label>
+        <input type='date' name='create_model_created_date' id='create_model_created_date' required />
 
-    <label for='create_model_file_path'>File Path: </label>
-    <input type='text' name='create_model_file_path' id='create_model_file_path' required />
+        <label for='create_model_modified_date'>Modified Date: </label>
+        <input type='date' name='create_model_modified_date' id='create_model_modified_date' />
 
-    <label for='create_model_is_active'>Is Active: </label>
-    <select name='create_model_is_active' id='create_model_is_active' required >
-        <option value='1' selected>Select</option>
-        <option value='1'>Active</option>
-        <option value='0'>Inactive</option>
-    </select>
+        <label for='create_model_file_path'>File Path: </label>
+        <input type='text' name='create_model_file_path' id='create_model_file_path' required />
 
-    <label for='create_model_id_material'>Material: </label>
-    <select name='create_model_id_material' id='create_model_id_material'>
-        <option value='' disabled selected>Select a Material</option>
-        {{#each materials}}
-        <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
-        {{/each}}
-    </select>
+        <label for='create_model_is_active'>Is Active: </label>
+        <select name='create_model_is_active' id='create_model_is_active' required >
+            <option value='1' selected>Select</option>
+            <option value='1'>Active</option>
+            <option value='0'>Inactive</option>
+        </select>
 
-    <label for='create_model_id_texture'>Texture: </label>
-    <select name='create_model_id_texture' id='create_model_id_texture'>
-        <option value='' disabled selected>Select a Texture</option>
-        {{#each textures}}
-        <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
-        {{/each}}
-    </select>
+        <label for='create_model_id_material'>Material: </label>
+        <select name='create_model_id_material' id='create_model_id_material'>
+            <option value='' disabled selected>Select a Material</option>
+            {{#each materials}}
+            <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <input type='submit' />
-</form>
+        <label for='create_model_id_texture'>Texture: </label>
+        <select name='create_model_id_texture' id='create_model_id_texture'>
+            <option value='' disabled selected>Select a Texture</option>
+            {{#each textures}}
+            <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
+            {{/each}}
+        </select>
 
-{{! UPDATE form }}
-<h2>Update a Model</h2>
-<form class='cuForm' id='update_model_form' method='POST' action='/models/update'>
-    <label for='update_model_id'>Model to Update: </label>
-    <select name='update_model_id' id='update_model_id' required>
-        <option value='' disabled selected>Select a Model</option>
-        {{#each models}}
-        <option value='{{this.id_model}}' required>
-            {{this.id_model}}
-            -
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
+        <input type='submit' class="submit"/>
+    </form>
 
-    <label for='update_model_description'>Description: </label>
-    <input type='text' name='update_model_description' id='update_model_description' />
+    {{! UPDATE form }}
+    <form class='cuForm' id='update_model_form' method='POST' action='/models/update'>
+        <h2>Update a Model</h2>
 
-    <label for='update_model_modified_date'>Modified Date: </label>
-    <input type='date' name='update_model_modified_date' id='update_model_modified_date' />
+        <label for='update_model_id'>Model to Update: </label>
+        <select name='update_model_id' id='update_model_id' required>
+            <option value='' disabled selected>Select a Model</option>
+            {{#each models}}
+            <option value='{{this.id_model}}' required>
+                {{this.id_model}}
+                -
+                {{this.name}}
+            </option>
+            {{/each}}
+        </select>
 
-    <label for='update_model_file_path'>File Path: </label>
-    <input type='text' name='update_model_file_path' id='update_model_file_path' required />
+        <label for='update_model_description'>Description: </label>
+        <input type='text' name='update_model_description' id='update_model_description' />
 
-    <label for='update_model_is_active'>Is Active: </label>
-    <select name='update_model_is_active' id='update_model_is_active' required >
-        <option value='1' disabled selected>Select</option>
-        <option value='1'>Active</option>
-        <option value='0'>Inactive</option>
-    </select>
+        <label for='update_model_modified_date'>Modified Date: </label>
+        <input type='date' name='update_model_modified_date' id='update_model_modified_date' />
 
-    <label for='update_model_id_material'>Material: </label>
-    <select name='update_model_id_material' id='update_model_id_material'>
-        <option value='' disabled selected>Select a Material</option>
-        {{#each materials}}
-        <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
-        {{/each}}
-    </select>
+        <label for='update_model_file_path'>File Path: </label>
+        <input type='text' name='update_model_file_path' id='update_model_file_path' required />
 
-    <label for='update_model_id_texture'>Texture: </label>
-    <select name='update_model_id_texture' id='update_model_id_texture'>
-        <option value='' disabled selected>Select a Texture</option>
-        {{#each textures}}
-        <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
-        {{/each}}
-    </select>
+        <label for='update_model_is_active'>Is Active: </label>
+        <select name='update_model_is_active' id='update_model_is_active' required >
+            <option value='1' disabled selected>Select</option>
+            <option value='1'>Active</option>
+            <option value='0'>Inactive</option>
+        </select>
 
-    <input type='submit' />
-</form>
+        <label for='update_model_id_material'>Material: </label>
+        <select name='update_model_id_material' id='update_model_id_material'>
+            <option value='' disabled selected>Select a Material</option>
+            {{#each materials}}
+            <option value='{{this.id_material}}'>{{this.id_material}} - {{this.name}}</option>
+            {{/each}}
+        </select>
 
-{{! DELETE form }}
-<h2>Delete a Model</h2>
-<form class='cuForm' id='delete_model_form' method='POST' action='/models/delete'>
-    <label for='delete_model_id'>Model to Delete: </label>
-    <select name='delete_model_id' id='delete_model_id' required>
-        <option value='' disabled selected>Select a Model</option>
-        {{#each models}}
-        <option value='{{this.id_model}}' required>
-            {{this.id_model}}
-            -
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
+        <label for='update_model_id_texture'>Texture: </label>
+        <select name='update_model_id_texture' id='update_model_id_texture'>
+            <option value='' disabled selected>Select a Texture</option>
+            {{#each textures}}
+            <option value='{{this.id_texture}}'>{{this.id_texture}} - {{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <input type='submit' />
-</form>
+        <input type='submit' class="submit"/>
+    </form>
+
+    {{! DELETE form }}
+    <form class='cuForm' id='delete_model_form' method='POST' action='/models/delete'>
+        <h2>Delete a Model</h2>
+
+        <label for='delete_model_id'>Model to Delete: </label>
+        <select name='delete_model_id' id='delete_model_id' required>
+            <option value='' disabled selected>Select a Model</option>
+            {{#each models}}
+            <option value='{{this.id_model}}' required>
+                {{this.id_model}}
+                -
+                {{this.name}}
+            </option>
+            {{/each}}
+        </select>
+
+        <input type='submit' class="submit"/>
+    </form>
+</div>

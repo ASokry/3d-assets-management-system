@@ -52,7 +52,12 @@ app.get('/', async function (req, res) {
 app.get('/models', async function (req, res) {
     try {
         // Retrieve models plus lists for dropdowns
-        const query1 = 'SELECT * FROM 3D_Models;';
+        const query1 = `SELECT 
+                            id_model, name, description,
+                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
+                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date,
+                            file_path, is_active, id_material, id_texture 
+                        FROM 3D_Models;`;
         const [models] = await db.query(query1);
         const [materials] = await db.query('SELECT id_material, name FROM Materials;');
         const [textures] = await db.query('SELECT id_texture, name FROM Textures;');
@@ -86,7 +91,13 @@ app.get('/artists', async function (req, res) {
 app.get('/materials', async function (req, res) {
     try {
         // Retrieve materials and artist list for dropdowns
-        const query1 = 'SELECT * FROM Materials;';
+        const query1 = `SELECT 
+                            id_material, name, description, 
+                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
+                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date, 
+                            base_color, roughness, metallic, transparency, 
+                            file_path, id_artist, is_active
+                        FROM Materials;`;
         const [materials] = await db.query(query1);
         const [artists] = await db.query('SELECT id_artist, first_name, last_name FROM Artists;');
         // Render the view with both datasets
@@ -103,7 +114,12 @@ app.get('/materials', async function (req, res) {
 app.get('/textures', async function (req, res) {
     try {
         // Retrieve textures and artist list for dropdowns
-        const query1 = 'SELECT * FROM Textures;';
+        const query1 = `SELECT
+                            id_texture, name, description, 
+                            DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date,
+                            DATE_FORMAT(modified_date, '%d/%m/%Y') AS modified_date, 
+                            resolution, file_path, id_artist, is_active
+                        FROM Textures;`;
         const [textures] = await db.query(query1);
         const [artists] = await db.query('SELECT id_artist, first_name, last_name FROM Artists;');
         res.render('textures', { textures: textures, artists: artists });
