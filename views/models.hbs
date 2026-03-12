@@ -5,6 +5,14 @@
     Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419
 --}}
 
+{{!-- 
+    Citation for use of AI Tools:
+    Date: 03/12/2026
+    Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+    Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+    AI Source URL: google.com/ai 
+ --}}
+
 <h1>Models</h1>
 
 {{! READ table }}
@@ -12,11 +20,15 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each models.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created On</th>
+            <th>Modified On</th>
+            <th>File Path</th>
+            <th>Active</th>
+            <th>Material</th>
+            <th>Texture</th>
         </tr>
     </thead>
 
@@ -24,15 +36,15 @@
         {{! For each row, print the model attributes }}
         {{#each models}}
         <tr>
-            <td>{{this.id_model}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
-            <td>{{this.created_date}}</td>
-            <td>{{this.modified_date}}</td>
-            <td>{{this.file_path}}</td>
-            <td>{{this.is_active}}</td>
-            <td>{{this.id_material}}</td>
-            <td>{{this.id_texture}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Description}}</td>
+            <td>{{this.[Created On]}}</td>
+            <td>{{this.[Modified On]}}</td>
+            <td>{{this.[File Path]}}</td>
+            <td>{{#if this.Active}}YES{{else}}NO{{/if}}</td>
+            <td>{{this.Material}}</td>
+            <td>{{this.Texture}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -60,7 +72,7 @@
 
         <label for='create_model_is_active'>Is Active: </label>
         <select name='create_model_is_active' id='create_model_is_active' required >
-            <option value='1' selected>Select</option>
+            <option value='' selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -92,10 +104,14 @@
         <select name='update_model_id' id='update_model_id' required>
             <option value='' disabled selected>Select a Model</option>
             {{#each models}}
-            <option value='{{this.id_model}}' required>
-                {{this.id_model}}
-                -
-                {{this.name}}
+            <option value="{{this.ID}}" 
+                data-description="{{this.Description}}" 
+                data-modified-date="{{this.[Modified On]}}"
+                data-file-path="{{this.[File Path]}}"
+                data-active="{{this.Active}}"
+                data-material="{{this.MaterialID}}"
+                data-texture="{{this.TextureID}}">
+                {{this.ID}} - {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -111,7 +127,7 @@
 
         <label for='update_model_is_active'>Is Active: </label>
         <select name='update_model_is_active' id='update_model_is_active' required >
-            <option value='1' disabled selected>Select</option>
+            <option value='' disabled selected>Select</option>
             <option value='1'>Active</option>
             <option value='0'>Inactive</option>
         </select>
@@ -143,10 +159,10 @@
         <select name='delete_model_id' id='delete_model_id' required>
             <option value='' disabled selected>Select a Model</option>
             {{#each models}}
-            <option value='{{this.id_model}}' required>
-                {{this.id_model}}
+            <option value='{{this.ID}}' required>
+                {{this.ID}}
                 -
-                {{this.name}}
+                {{this.Name}}
             </option>
             {{/each}}
         </select>
@@ -154,3 +170,38 @@
         <input type='submit' class="submit"/>
     </form>
 </div>
+
+{{!-- Auto Populate --}}
+<script>
+    const modelSelect = document.getElementById('update_model_id');
+    const descriptionInput = document.getElementById('update_model_description');
+    const modifiedDateInput = document.getElementById('update_model_modified_date');
+    const filePathInput = document.getElementById('update_model_file_path');
+    const activeInput = document.getElementById('update_model_is_active');
+    const materialInput = document.getElementById('update_model_id_material');
+    const textureInput = document.getElementById('update_model_id_texture');
+
+    modelSelect.addEventListener('change', function() {
+        // Get the currently selected option element
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Pull the data attributes we added in Step 1
+        const description = selectedOption.getAttribute('data-description');
+        const modifiedDate = selectedOption.getAttribute('data-modified-date');
+        const filePath = selectedOption.getAttribute('data-file-path');
+        const active = selectedOption.getAttribute('data-active');
+        const material = selectedOption.getAttribute('data-material');
+        const texture = selectedOption.getAttribute('data-texture');
+
+        const mdParts = modifiedDate.split('/');
+        const mdFormatted = `${mdParts[2]}-${mdParts[1]}-${mdParts[0]}`; 
+
+        // Populate the input fields
+        descriptionInput.value = description || '';
+        modifiedDateInput.value = mdFormatted || '';
+        filePathInput.value = filePath || '';
+        activeInput.value = active || '';
+        materialInput.value = material || '';
+        textureInput.value = texture || '';
+    });
+</script>

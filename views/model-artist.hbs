@@ -5,6 +5,14 @@
     Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-web-application-technology-2?module_item_id=26243419
 --}}
 
+{{!-- 
+    Citation for use of AI Tools:
+    Date: 03/12/2026
+    Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+    Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+    AI Source URL: google.com/ai 
+ --}}
+
 <h1>Model-Artist Relationships</h1>
 
 {{! READ table }}
@@ -12,9 +20,9 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            <th>id_model_artist</th>
-            <th>model_name</th>
-            <th>artist_full_name</th>
+            <th>ID</th>
+            <th>Model</th>
+            <th>Artist</th>
         </tr>
     </thead>
 
@@ -22,9 +30,9 @@
         {{! For each row, print the model-artist attributes }}
         {{#each modelArtists}}
         <tr>
-            <td>{{this.id_model_artist}}</td>
-            <td>{{this.model_name}}</td>
-            <td>{{this.artist_full_name}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Model}}</td>
+            <td>{{this.Artist}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -62,8 +70,8 @@
         <select name='update_model_artist_id' id='update_model_artist_id' required>
             <option value='' disabled selected>Select a Relationship</option>
             {{#each modelArtists}}
-            <option value='{{this.id_model_artist}}' required>
-                {{this.id_model_artist}} - {{this.model_name}} / {{this.artist_full_name}}
+            <option value="{{this.ID}}" data-model="{{this.ModelID}}" data-artist="{{this.ArtistID}}">
+                {{this.ID}} - {{this.Model}} / {{this.Artist}}
             </option>
             {{/each}}
         </select>
@@ -72,7 +80,7 @@
         <select name='update_model_artist_id_model' id='update_model_artist_id_model' required>
             <option value='' disabled selected>Select a Model</option>
             {{#each models}}
-            <option value='{{this.id_model}}'>{{this.id_model}} - {{this.name}}</option>
+                <option value='{{this.id_model}}'>{{this.id_model}} - {{this.name}}</option>
             {{/each}}
         </select>
 
@@ -95,8 +103,8 @@
         <select name='delete_model_artist_id' id='delete_model_artist_id' required>
             <option value='' disabled selected>Select a Relationship</option>
             {{#each modelArtists}}
-            <option value='{{this.id_model_artist}}' required>
-                {{this.id_model_artist}} - {{this.model_name}} / {{this.artist_full_name}}
+            <option value='{{this.ID}}' required>
+                {{this.ID}} - {{this.Model}} / {{this.Artist}}
             </option>
             {{/each}}
         </select>
@@ -104,3 +112,23 @@
         <input type='submit' class="submit"/>
     </form>
 </div>
+
+{{!-- Auto Populate --}}
+<script>
+    const modelArtistSelect = document.getElementById('update_model_artist_id');
+    const modelInput = document.getElementById('update_model_artist_id_model');
+    const artistInput = document.getElementById('update_model_artist_id_artist');
+
+    modelArtistSelect.addEventListener('change', function() {
+        // Get the currently selected option element
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Pull the data attributes we added in Step 1
+        const model = selectedOption.getAttribute('data-model');
+        const artist = selectedOption.getAttribute('data-artist');
+
+        // Populate the input fields
+        modelInput.value = model || '';
+        artistInput.value = artist || '';
+    });
+</script>
