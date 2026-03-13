@@ -8,31 +8,31 @@
 <h1 class="homeTitle">3D Assets Management System</h1>
 <p class="authors">Authors: Ethan Hong &amp; Anthony Sokry</p>
 <div>
-    <p class="description">Simple system for managing static 3D models, materials, textures, and accompanying artists.</p>
+    <p class="description">Simple database interface for managing static 3D models, materials, textures, and accompanying artists.</p>
     <div class="homeTables">
         <div class="tabelCard">
             <h1>Models</h1>
-            <p>Manage records of static 3D models.</p>
+            <p>Manage records of static 3D models, which are stored in the "3D_Models" table from the database.</p>
             <a href="/models">&#10141; VIEW</a>
         </div>
         <div class="tabelCard">
             <h1>Artists</h1>
-            <p>Manage records of individual artists.</p>
+            <p>Manage records of individual artists, which are stored in the "Artists" table from the database.</p>
             <a href="/artists">&#10141; VIEW</a>
         </div>
         <div class="tabelCard">
             <h1>Materials</h1>
-            <p>Manage records of materials made by artists.</p>
+            <p>Manage records of materials, which are stored in the "Materials" table from the database.</p>
             <a href="/materials">&#10141; VIEW</a>
         </div>
         <div class="tabelCard">
             <h1>Textures</h1>
-            <p>Manage records of textures made by artists.</p>
+            <p>Manage records of textures, which are stored in the "Textures" table from the database.</p>
             <a href="/textures">&#10141; VIEW</a>
         </div>
         <div class="tabelCard">
             <h1>Model &amp; Artist</h1>
-            <p>Intersection table for managing which 3D models were worked on by which artists.</p>
+            <p>Manage records of which 3D models were worked on by which artists. Records are stored in the intersection table, "3D_Models_Has_Artists".</p>
             <a href="/model-artist">&#10141; VIEW</a>
         </div>
     </div>
