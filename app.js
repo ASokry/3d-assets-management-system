@@ -3,6 +3,11 @@
 // Adapted from: CS340 Canvas Exploration - Web Application Technology and Exploration - Implementing CUD operations in your app, Node.js code
 // Source URL: https://canvas.oregonstate.edu/courses/2031764/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26243436
 
+// Citation for use of AI Tools:
+// Date: 03/12/2026
+// Prompts used: How do i auto-populate a form with attributes currently in the database once a user has selected an ID from the dropdown menu. 
+// Here is the JS app.post code and handlebar form code. {INSERT_JS_CODE} {INSERT_HANDLEBAR_CODE}
+// AI Source URL: google.com/ai 
 
 // ########################################
 // ########## SETUP
